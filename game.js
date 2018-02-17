@@ -49,7 +49,7 @@
 
   let workingGameBoard = {};
 
-  let gameMode = 0;
+  let playerGame = true;
 
   let player = 1;
 
@@ -58,6 +58,7 @@
     for (key in gameBoard) {
       workingGameBoard[key] = Object.assign({}, gameBoard[key]);
       workingGameBoard[key].location.classList.remove("blue", "red");
+      workingGameBoard[key].location.innerHTML = ``;
     }
     console.log(workingGameBoard);
 
@@ -70,7 +71,7 @@
   });
 
   switchGameMode = () => {
-    gameMode = !gameMode;
+    playerGame = !playerGame;
   };
 
   winGame = () => {
@@ -78,36 +79,71 @@
   };
 
   gameCheck = player => {
-      // fix this 
+    // fix this
+
     if (
-      (workingGameBoard.tile0.player === player &&
-        workingGameBoard.tile1.player === player &&
-        workingGameBoard.tile2.player === player) ||
-      (workingGameBoard.tile3.player === player &&
-        workingGameBoard.tile4.player === player &&
-        workingGameBoard.tile5.player === player) ||
-      (workingGameBoard.tile6.player === player &&
-        workingGameBoard.tile7.player === player &&
-        workingGameBoard.tile8.player === player) ||
-      (workingGameBoard.tile0.player === player &&
-        workingGameBoard.tile3.player === player &&
-        workingGameBoard.tile6.player === player) ||
-      (workingGameBoard.tile1.player === player &&
-        workingGameBoard.tile4.player === player &&
-        workingGameBoard.tile7.player === player) ||
-      (workingGameBoard.tile2.player === player &&
-        workingGameBoard.tile5.player === player &&
-        workingGameBoard.tile8.player === player) ||
-      (workingGameBoard.tile0.player === player &&
-        workingGameBoard.tile4.player === player &&
-        workingGameBoard.tile8.player === player) ||
-      (workingGameBoard.tile2.player === player &&
-        workingGameBoard.tile4.player === player &&
-        workingGameBoard.tile6.player === player)
+      [
+        workingGameBoard.tile0,
+        workingGameBoard.tile1,
+        workingGameBoard.tile2
+      ].every(x => x.player === player) ||
+      [
+        workingGameBoard.tile3,
+        workingGameBoard.tile4,
+        workingGameBoard.tile5
+      ].every(x => x.player === player) ||
+      [
+        workingGameBoard.tile6,
+        workingGameBoard.tile7,
+        workingGameBoard.tile8
+      ].every(x => x.player === player) ||
+      [
+        workingGameBoard.tile0,
+        workingGameBoard.tile3,
+        workingGameBoard.tile6
+      ].every(x => x.player === player) ||
+      [
+        workingGameBoard.tile1,
+        workingGameBoard.tile4,
+        workingGameBoard.tile7
+      ].every(x => x.player === player) ||
+      [
+        workingGameBoard.tile2,
+        workingGameBoard.tile5,
+        workingGameBoard.tile8
+      ].every(x => x.player === player) ||
+      [
+        workingGameBoard.tile0,
+        workingGameBoard.tile4,
+        workingGameBoard.tile8
+      ].every(x => x.player === player) ||
+      [
+        workingGameBoard.tile2,
+        workingGameBoard.tile4,
+        workingGameBoard.tile6
+      ].every(x => x.player === player)
     ) {
-      console.log(`player ${player} wins!`);
+      alert(`player ${player} wins!`);
       initializeGame();
-      //async 
+      return true;
+    } else if (
+      [
+        workingGameBoard.tile0,
+        workingGameBoard.tile1,
+        workingGameBoard.tile2,
+        workingGameBoard.tile3,
+        workingGameBoard.tile4,
+        workingGameBoard.tile5,
+        workingGameBoard.tile6,
+        workingGameBoard.tile7,
+        workingGameBoard.tile8
+      ].every(x => x.player)
+    ) {
+      alert("It's a draw!");
+      initializeGame();
+      return true;
+    } else {
+      return false;
     }
   };
 
@@ -118,13 +154,19 @@
     if (!workingGameBoard[tile].player) {
       if (player === 1) {
         workingGameBoard[tile].player = 1;
-        gameCheck(1);
-        document.getElementById(tile).classList.add("blue");
+        gameCheck(1)
+          ? true
+          : (playerTile.innerHTML = `
+          <div>X</div>
+          `);
         player = 2;
       } else {
         workingGameBoard[tile].player = 2;
-        gameCheck(2);
-        document.getElementById(tile).classList.add("red");
+        gameCheck(2)
+          ? true
+          : (playerTile.innerHTML = `
+          <div>O</div>
+          `);
         player = 1;
       }
     } else if (workingGameBoard[tile].player) {

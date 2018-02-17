@@ -12,20 +12,20 @@
 <body>
     <h1>Kenzie's Game</h1>
     <div class="game-board">
-        <div class="row">
-            <div class="game-tile" id="tile0" onClick="playerMove('tile0')"></div>
+        <div class="row row-bottom-edge">
+            <div class="game-tile tile-right-edge" id="tile0" onClick="playerMove('tile0')"></div>
             <div class="game-tile" id="tile1" onClick="playerMove('tile1')"></div>
-            <div class="game-tile" id="tile2" onClick="playerMove('tile2')"></div>
+            <div class="game-tile tile-left-edge" id="tile2" onClick="playerMove('tile2')"></div>
         </div>
-        <div class="row">
-            <div class="game-tile" id="tile3" onClick="playerMove('tile3')"></div>
+        <div class="row row-bottom-edge">
+            <div class="game-tile tile-right-edge" id="tile3" onClick="playerMove('tile3')"></div>
             <div class="game-tile" id="tile4" onClick="playerMove('tile4')"></div>
-            <div class="game-tile" id="tile5" onClick="playerMove('tile5')"></div>
+            <div class="game-tile tile-left-edge" id="tile5" onClick="playerMove('tile5')"></div>
         </div>
         <div class="row">
-            <div class="game-tile" id="tile6" onClick="playerMove('tile6')"></div>
+            <div class="game-tile tile-right-edge" id="tile6" onClick="playerMove('tile6')"></div>
             <div class="game-tile" id="tile7" onClick="playerMove('tile7')"></div>
-            <div class="game-tile" id="tile8" onClick="playerMove('tile8')"></div>
+            <div class="game-tile tile-left-edge" id="tile8" onClick="playerMove('tile8')"></div>
         </div>
     </div>
     <button onClick="initializeGame()">Redo</button>

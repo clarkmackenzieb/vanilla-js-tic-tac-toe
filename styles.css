@@ -1,8 +1,18 @@
+body {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 100vw;
+}
+
 .game-tile {
-  height: 50px;
-  width: 50px;
-  background-color: gray;
-  border: black solid 1px;
+  height: 100px;
+  width: 100px;
+  background-color: white;
+  /* border: cyan solid 10px; */
+  /* border-radius: 70px; */
 }
 
 .game-board {
@@ -21,4 +31,16 @@
 
 .blue {
   background-color: blue;
+}
+
+.row-bottom-edge {
+  border-bottom: black 5px solid;
+}
+
+.tile-right-edge {
+  border-right: black 5px solid;
+}
+
+.tile-left-edge {
+  border-left: black 5px solid;
 }

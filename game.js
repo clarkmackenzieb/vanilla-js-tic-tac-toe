@@ -72,15 +72,21 @@
 
   switchGameMode = () => {
     playerGame = !playerGame;
+    playerGame
+      ? (document.getElementById(
+          "switch-game"
+        ).innerHTML = `<h3>Player vs. Player</h3>`)
+      : (document.getElementById(
+          "switch-game"
+        ).innerHTML = `<h3>Player vs. Computer</h3>`);
   };
 
   winGame = () => {
     alert("You win!");
   };
 
-  gameCheck = player => {
-    // fix this
-
+  gameCheck = (player, tile) => {
+    console.log("gameCheck runs", player);
     if (
       [
         workingGameBoard.tile0,
@@ -153,20 +159,19 @@
     let playerTile = document.getElementById(tile);
     if (!workingGameBoard[tile].player) {
       if (player === 1) {
+        playerTile.innerHTML = `
+            <div class="markers">X</div>
+            `;
         workingGameBoard[tile].player = 1;
-        gameCheck(1)
-          ? true
-          : (playerTile.innerHTML = `
-          <div>X</div>
-          `);
-        player = 2;
+        console.log("HTML set");
+        gameCheck(1, tile);
+        playerGame ? (player = 2) : computerMove(tile);
       } else {
+        playerTile.innerHTML = `
+            <div class="markers">O</div>
+            `;
         workingGameBoard[tile].player = 2;
-        gameCheck(2)
-          ? true
-          : (playerTile.innerHTML = `
-          <div>O</div>
-          `);
+        gameCheck(2);
         player = 1;
       }
     } else if (workingGameBoard[tile].player) {

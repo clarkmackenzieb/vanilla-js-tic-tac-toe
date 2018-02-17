@@ -11,9 +11,13 @@
 
 <body>
     <h1>Kenzie's Game</h1>
+    <div id="switch-game">
+        <h3>Player vs. Player</h3>
+    </div>
     <div class="game-board">
         <div class="row row-bottom-edge">
-            <div class="game-tile tile-right-edge" id="tile0" onClick="playerMove('tile0')"></div>
+            <div class="game-tile tile-right-edge" id="tile0" onClick="playerMove('tile0')">
+            </div>
             <div class="game-tile" id="tile1" onClick="playerMove('tile1')"></div>
             <div class="game-tile tile-left-edge" id="tile2" onClick="playerMove('tile2')"></div>
         </div>
@@ -29,6 +33,7 @@
         </div>
     </div>
     <button onClick="initializeGame()">Redo</button>
+    <button onClick="switchGameMode()">Switch Game Mode</button>
     <script type="text/javascript" src="game.js"></script>
 </body>
 

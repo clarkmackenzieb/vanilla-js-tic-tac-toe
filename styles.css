@@ -8,11 +8,12 @@ body {
 }
 
 .game-tile {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   height: 100px;
   width: 100px;
   background-color: white;
-  /* border: cyan solid 10px; */
-  /* border-radius: 70px; */
 }
 
 .game-board {
@@ -25,14 +26,6 @@ body {
   flex-direction: row;
 }
 
-.red {
-  background-color: red;
-}
-
-.blue {
-  background-color: blue;
-}
-
 .row-bottom-edge {
   border-bottom: black 5px solid;
 }
@@ -43,4 +36,10 @@ body {
 
 .tile-left-edge {
   border-left: black 5px solid;
+}
+
+.markers {
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
 }

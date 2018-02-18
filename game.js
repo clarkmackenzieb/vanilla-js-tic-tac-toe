@@ -51,6 +51,43 @@
     }
   };
 
+  const colorSchemes = {
+    1: {
+      1: "#4ABDAC",
+      2: "#FC4A1A",
+      3: "#F7B733",
+      4: "#DFDCE3"
+    },
+    2: {
+      1: "#96848D",
+      2: "#6E7A92",
+      3: "#8F99A1",
+      4: "#D5D5D5"
+    },
+    3: {
+      1: "#CDEAF4",
+      2: "#A9A9A9",
+      3: "#FD3A42",
+      4: "#EFEFEF"
+    },
+    4: {
+      1: "#D7CDC7",
+      2: "#565656",
+      3: "#753240",
+      4: "#C2A081"
+    },
+    5: {
+      1: "#9B8550",
+      2: "#BBAB86",
+      3: "#181818",
+      4: "#FFFFFF"
+    },
+    6: {
+      1: "#FFFFFF",
+      2: "#000000"
+    }
+  };
+
   let workingGameBoard = {};
 
   let playerGame = true;
@@ -99,6 +136,15 @@
     document
       .getElementsByClassName("input-visible")[0]
       .setAttribute("id", "hidden");
+  };
+
+  //function to change color scheme
+
+  changeColor = scheme => {
+    console.log(document.getElementsByTagName("body"));
+    document
+      .getElementsByTagName("body")[0]
+      .setAttribute("style", `background-color:${colorSchemes[scheme][1]}`);
   };
 
   //function to switch game mode from player vs. player to computer vs. player
@@ -219,7 +265,7 @@
     if (!workingGameBoard[tile].player) {
       if (player === 1) {
         playerTile.innerHTML = `
-            <div class="markers">X</div>
+            <p class="markers">X</p>
             `;
 
         workingGameBoard[tile].player = 1;
@@ -237,7 +283,7 @@
         player = 1;
         document.getElementById(`player-${player}`).classList.add("flash");
         playerTile.innerHTML = `
-            <div class="markers">O</div>
+            <p class="markers">O</p>
             `;
         workingGameBoard[tile].player = 2;
         gameCheck(2);

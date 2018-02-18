@@ -59,16 +59,16 @@
       4: "#DFDCE3"
     },
     2: {
-      1: "#96848D",
-      2: "#6E7A92",
+      1: "#6E7A92",
+      2: "#96848D",
       3: "#8F99A1",
       4: "#D5D5D5"
     },
     3: {
-      1: "#CDEAF4",
-      2: "#A9A9A9",
-      3: "#FD3A42",
-      4: "#EFEFEF"
+      1: "#DC7351",
+      2: "#092F50",
+      3: "#DDB144",
+      4: "#FEDCD2"
     },
     4: {
       1: "#D7CDC7",
@@ -84,7 +84,9 @@
     },
     6: {
       1: "#FFFFFF",
-      2: "#000000"
+      2: "#000000",
+      3: "#000000",
+      4: "#000000"
     }
   };
 
@@ -141,17 +143,31 @@
   //function to change color scheme
 
   changeColor = scheme => {
-    console.log(document.getElementsByTagName("h3"));
-    let headers = document.getElementsByTagName("h3");
-    // .concat(document.getElementsByTagName("h1"));
-    document.getElementsByTagName("body")[0].style.backgroundColor = `${
-      colorSchemes[scheme][1]
-    }`;
-    console.log(headers);
-    //   .map(x => (x.style.color = `color:${colorSchemes[scheme][4]}`));
-    // document
-    //   .getElementsByTagName("h1")
-    //   .map(x => (x.style.color = `color:${colorSchemes[scheme][4]}`));
+    let bodyBackground = document.getElementsByTagName("body")[0];
+    let gameTiles = document.getElementsByClassName("game-tile");
+    let buttonStyles = document.getElementsByTagName("button");
+    let borders = [
+      ...document.getElementsByClassName("row-bottom-edge"),
+      ...document.getElementsByClassName("tile-left-edge"),
+      ...document.getElementsByClassName("tile-right-edge")
+    ];
+    let headers = [
+      ...document.getElementsByTagName("h3"),
+      ...document.getElementsByTagName("h1")
+    ];
+    for (let i = 0; i < gameTiles.length; i++) {
+      gameTiles[i].style.backgroundColor = `${colorSchemes[scheme][1]}`;
+      gameTiles[i].style.color = `${colorSchemes[scheme][3]}`;
+    }
+    for (let j = 0; j < headers.length; j++) {
+      headers[j].style.color = `${colorSchemes[scheme][4]}`;
+    }
+    bodyBackground.style.backgroundColor = `${colorSchemes[scheme][1]}`;
+    for (k = 0; k < buttonStyles.length; k++) {
+      buttonStyles[k].style.backgroundColor = `${colorSchemes[scheme][1]}`;
+      buttonStyles[k].style.color = `${colorSchemes[scheme][3]}`;
+    }
+    borders.map(x => (x.style.borderColor = `${colorSchemes[scheme][2]}`));
   };
 
   //function to switch game mode from player vs. player to computer vs. player

@@ -172,16 +172,16 @@ body {
 }
 
 #scheme3-color1 {
-  background-color: #cdeaf4;
+  background-color: #dc7351;
 }
 #scheme3-color2 {
-  background-color: #a9a9a9;
+  background-color: #092f50;
 }
 #scheme3-color3 {
-  background-color: #fd3a42;
+  background-color: #ddb144;
 }
 #scheme3-color4 {
-  background-color: #efefef;
+  background-color: #fedcd2;
 }
 
 #scheme4-color1 {
@@ -216,4 +216,14 @@ body {
 
 #default-color2 {
   background-color: #000000;
+}
+
+button {
+  background-color: #000000;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
 }

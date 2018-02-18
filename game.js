@@ -61,8 +61,8 @@
     document.getElementById("hidden").removeAttribute("id");
   };
   submitNames = () => {
-      player1Name = document.getElementById("player1-input").value;
-      player2Name = document.getElementById("player2-input").value;
+    player1Name = document.getElementById("player1-input").value;
+    player2Name = document.getElementById("player2-input").value;
     document.getElementById("player-1").innerHTML = `
       <h3>${player1Name}</h3>
       `;
@@ -80,7 +80,7 @@
       workingGameBoard[key] = Object.assign({}, gameBoard[key]);
       workingGameBoard[key].location.innerHTML = ``;
     }
-    console.log("Game initialized", player);
+    console.log("Game initialized");
   };
 
   document.addEventListener("DOMContentLoaded", function() {
@@ -89,22 +89,21 @@
 
   switchGameMode = () => {
     playerGame = !playerGame;
-    if(playerGame){
-        document.getElementById(
-            "switch-game"
-          ).innerHTML = `<h3>Player vs. Player</h3>`;
-          document.getElementById("player-1").innerHTML = `
+    if (playerGame) {
+      document.getElementById(
+        "switch-game"
+      ).innerHTML = `<h3>Player vs. Player</h3>`;
+      document.getElementById("player-1").innerHTML = `
           <h3>${player1Name}</h3>
           `;
-        document.getElementById("player-2").innerHTML = `
+      document.getElementById("player-2").innerHTML = `
           <h3>${player2Name}</h3>
           `;
-    }
-    else if(!playerGame){
-        document.getElementById(
-            "switch-game"
-          ).innerHTML = `<h3>Player vs. Computer</h3>`
-          document.getElementById("player-2").innerHTML = `
+    } else if (!playerGame) {
+      document.getElementById(
+        "switch-game"
+      ).innerHTML = `<h3>Player vs. Computer</h3>`;
+      document.getElementById("player-2").innerHTML = `
           <h3>Watson</h3>
           `;
     }
@@ -160,7 +159,6 @@
     ) {
       initializeGame();
       alert(`Player ${player} wins!`);
-      player = 1;
       return true;
     } else if (
       [
@@ -175,7 +173,6 @@
         workingGameBoard.tile8
       ].every(x => x.player)
     ) {
-      player = 2;
       alert("It's a draw!");
       initializeGame();
       return true;
@@ -191,15 +188,12 @@
   playerMove = tile => {
     let playerTile = document.getElementById(tile);
     if (!workingGameBoard[tile].player) {
-      console.log(player);
       if (player === 1) {
-        console.log(player);
         playerTile.innerHTML = `
             <div class="markers">X</div>
             `;
 
         workingGameBoard[tile].player = 1;
-        gameCheck(1) && playerGame ? true : (player = 2);
         if (gameCheck(1) && playerGame) {
           return true;
         } else if (!gameCheck(1) && playerGame) {
@@ -208,7 +202,6 @@
           computerMove(1);
         }
       } else if (player === 2) {
-        console.log(player);
         player = 1;
         playerTile.innerHTML = `
             <div class="markers">O</div>

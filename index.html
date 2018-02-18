@@ -10,9 +10,27 @@
 </head>
 
 <body>
-    <h1>Kenzie's Game</h1>
-    <div id="switch-game">
-        <h3>Player vs. Player</h3>
+    <div class="game-header">
+        <h1 class="target">Kenzie's Game</h1>
+        <div id="switch-game">
+            <h3>Player vs. Player</h3>
+        </div>
+    </div>
+    <div class="player-names">
+        <div id="player-1">
+            <h3>Player 1</h3>
+        </div>
+        <div id="player-2">
+            <h3>Player 2</h3>
+        </div>
+    </div>
+    <button onClick="editNames()">Edit Player Names</button>
+    <div class="input-visible" id="hidden">
+        <div class="input-inner-styling">
+            <input placeholder="Player 1 Name" id="player1-input" />
+            <input placeholder="Player 2 Name" id="player2-input" />
+        </div>
+        <button onClick="submitNames()">Submit</button>
     </div>
     <div class="game-board">
         <div class="row row-bottom-edge">

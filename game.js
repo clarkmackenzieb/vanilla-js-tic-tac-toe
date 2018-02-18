@@ -1,4 +1,8 @@
 (function() {
+  //Using an IIFE so global scope of project isn't polluted
+
+  // Initialization of default game variables
+
   const gameBoard = {
     tile0: {
       marked: false,
@@ -57,22 +61,7 @@
 
   let player2Name = "Player2";
 
-  editNames = () => {
-    document.getElementById("hidden").removeAttribute("id");
-  };
-  submitNames = () => {
-    player1Name = document.getElementById("player1-input").value;
-    player2Name = document.getElementById("player2-input").value;
-    document.getElementById("player-1").innerHTML = `
-      <h3>${player1Name}</h3>
-      `;
-    document.getElementById("player-2").innerHTML = `
-      <h3>${player2Name}</h3>
-      `;
-    document
-      .getElementsByClassName("input-visible")[0]
-      .setAttribute("id", "hidden");
-  };
+  // function for game initialization, run on win, draw, and redo
 
   initializeGame = () => {
     player = 1;
@@ -83,9 +72,33 @@
     console.log("Game initialized");
   };
 
+  //event listener on DOM load to run game initialization
+
   document.addEventListener("DOMContentLoaded", function() {
     initializeGame();
   });
+
+  // functions to edit and submit player names.
+
+  editNames = () => {
+    document.getElementById("hidden").removeAttribute("id");
+  };
+  submitNames = () => {
+    player1Name = document.getElementById("player1-input").value;
+    player2Name = document.getElementById("player2-input").value;
+    document.getElementById("player-1").innerHTML = `
+        <h3>${player1Name}</h3>
+        `;
+    document.getElementById("player-2").innerHTML = `
+        <h3>${player2Name}</h3>
+        `;
+    document
+      .getElementsByClassName("input-visible")[0]
+      .setAttribute("id", "hidden");
+  };
+
+  //function to switch game mode from player vs. player to computer vs. player
+  // includes switching player name
 
   switchGameMode = () => {
     playerGame = !playerGame;
@@ -113,6 +126,8 @@
   winGame = () => {
     alert("You win!");
   };
+
+  // large function to check win conditions each time a player moves
 
   gameCheck = player => {
     if (
@@ -181,9 +196,13 @@
     }
   };
 
+  // function for logic behind computer moves
+
   computerMove = tile => {
     let computerTile = document.getElementById(tile);
   };
+
+  //function for player moving
 
   playerMove = tile => {
     let playerTile = document.getElementById(tile);
@@ -194,6 +213,7 @@
             `;
 
         workingGameBoard[tile].player = 1;
+        //functionality here for checking if the player has won, if they haven't, and if it if computer vs. player
         if (gameCheck(1) && playerGame) {
           return true;
         } else if (!gameCheck(1) && playerGame) {

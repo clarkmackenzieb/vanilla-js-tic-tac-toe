@@ -68,7 +68,9 @@
     for (key in gameBoard) {
       workingGameBoard[key] = Object.assign({}, gameBoard[key]);
       workingGameBoard[key].location.innerHTML = ``;
+      workingGameBoard[key].location.classList.remove("fade-in");
     }
+    document.getElementById(`player-1`).classList.add("flash");
     console.log("Game initialized");
   };
 
@@ -81,7 +83,9 @@
   // functions to edit and submit player names.
 
   editNames = () => {
-    document.getElementById("hidden").removeAttribute("id");
+    if (document.getElementById("hidden")) {
+      document.getElementById("hidden").removeAttribute("id");
+    }
   };
   submitNames = () => {
     player1Name = document.getElementById("player1-input").value;
@@ -173,7 +177,9 @@
       ].every(x => x.player === player)
     ) {
       initializeGame();
-      alert(`Player ${player} wins!`);
+      player === 1
+        ? alert(`${player1Name} wins!`)
+        : alert(`${player2Name} wins!`);
       return true;
     } else if (
       [
@@ -205,7 +211,11 @@
   //function for player moving
 
   playerMove = tile => {
+    // removing all instances of the flash animation and adding it for the player whose turn it is
+    document.getElementById("player-1").classList.remove("flash");
+    document.getElementById("player-2").classList.remove("flash");
     let playerTile = document.getElementById(tile);
+    playerTile.classList.add("fade-in");
     if (!workingGameBoard[tile].player) {
       if (player === 1) {
         playerTile.innerHTML = `
@@ -218,11 +228,14 @@
           return true;
         } else if (!gameCheck(1) && playerGame) {
           player = 2;
+
+          document.getElementById(`player-${player}`).classList.add("flash");
         } else if (!gameCheck(1) && !playerGame) {
           computerMove(1);
         }
       } else if (player === 2) {
         player = 1;
+        document.getElementById(`player-${player}`).classList.add("flash");
         playerTile.innerHTML = `
             <div class="markers">O</div>
             `;

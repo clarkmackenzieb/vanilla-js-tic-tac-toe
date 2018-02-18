@@ -18,6 +18,10 @@ body {
   height: 100px;
   width: 100px;
   background-color: white;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
 }
 
 .game-board {
@@ -49,10 +53,17 @@ body {
   font-weight: bold;
 }
 
-.player-names {
+.player-container {
   width: 50vw;
   display: flex;
   justify-content: space-between;
+}
+
+.player-name-flash {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
 }
 
 .input-visible {
@@ -74,25 +85,61 @@ body {
   display: none;
 }
 
-/* flash animation check out those pseudoclasses*/
-target:click {
-  -webkit-animation: target-fade 3s 1;
-  -moz-animation: target-fade 3s 1;
+/* flash and fade-in animation*/
+
+.flash {
+  animation-name: flash;
 }
 
-@-webkit-keyframes target-fade {
-  0% {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
+@keyframes flash {
+  0%,
+  50%,
   100% {
-    background-color: rgba(0, 0, 0, 0);
+    opacity: 1;
+  }
+  25%,
+  75% {
+    opacity: 0;
   }
 }
-@-moz-keyframes target-fade {
+
+.fade-in {
+  animation-name: fade-in;
+}
+
+@keyframes fade-in {
   0% {
-    background-color: rgba(0, 0, 0, 0.1);
+    opacity: 0;
   }
+
+  50% {
+    opacity: 0.5;
+  }
+
   100% {
-    background-color: rgba(0, 0, 0, 0);
+    opacity: 1;
   }
 }
+
+.color-wrapper {
+  /* position: relative; */
+  height: 100px;
+  width: 100px;
+  border: 1px solid black;
+  z-index: 100;
+}
+
+#color1 {
+  background-color: #4abdac;
+}
+#color2 {
+  background-color: #fc4a1a;
+}
+#color3 {
+  background-color: #f78733;
+}
+#color4 {
+  background-color: #dfdce3;
+}
+
+.;

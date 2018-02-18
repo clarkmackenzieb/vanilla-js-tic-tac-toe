@@ -122,22 +122,31 @@ body {
 }
 
 .color-wrapper {
-  /* position: relative; */
   height: 100px;
   width: 100px;
   border: 1px solid black;
-  z-index: 100;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
-#color1 {
+.color1 {
+  height: 50px;
+  width: 50px;
   background-color: #4abdac;
 }
-#color2 {
+.color2 {
+  height: 50px;
+  width: 50px;
   background-color: #fc4a1a;
 }
-#color3 {
+.color3 {
+  height: 50px;
+  width: 50px;
   background-color: #f78733;
 }
-#color4 {
+.color4 {
+  height: 50px;
+  width: 50px;
   background-color: #dfdce3;
 }

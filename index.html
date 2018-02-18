@@ -34,12 +34,12 @@
     </div>
     <div class="game-board">
         <div class="row row-bottom-edge">
-            <div>
-                <div class="game-tile tile-right-edge" id="tile0" onClick="playerMove('tile0')"></div>
+            <div class=" tile-right-edge">
+                <div class="game-tile" id="tile0" onClick="playerMove('tile0')"></div>
             </div>
             <div class="game-tile" id="tile1" onClick="playerMove('tile1')"></div>
-            <div>
-                <div class="game-tile tile-left-edge" id="tile2" onClick="playerMove('tile2')"></div>
+            <div class=" tile-left-edge">
+                <div class="game-tile" id="tile2" onClick="playerMove('tile2')"></div>
             </div>
         </div>
         <div class="row row-bottom-edge">
@@ -63,12 +63,7 @@
     </div>
     <button onClick="initializeGame()">Redo</button>
     <button onClick="switchGameMode()">Switch Game Mode</button>
-    <div class="color-wrapper">
-        <div id="color1">Color1</div>
-        <div id="color2">Color2</div>
-        <div id="color3">Color3</div>
-        <div id="color4">Color4</div>
-    </div>
+
     <script type="text/javascript" src="game.js"></script>
 </body>
 

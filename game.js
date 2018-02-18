@@ -141,10 +141,17 @@
   //function to change color scheme
 
   changeColor = scheme => {
-    console.log(document.getElementsByTagName("body"));
-    document
-      .getElementsByTagName("body")[0]
-      .setAttribute("style", `background-color:${colorSchemes[scheme][1]}`);
+    console.log(document.getElementsByTagName("h3"));
+    let headers = document.getElementsByTagName("h3");
+    // .concat(document.getElementsByTagName("h1"));
+    document.getElementsByTagName("body")[0].style.backgroundColor = `${
+      colorSchemes[scheme][1]
+    }`;
+    console.log(headers);
+    //   .map(x => (x.style.color = `color:${colorSchemes[scheme][4]}`));
+    // document
+    //   .getElementsByTagName("h1")
+    //   .map(x => (x.style.color = `color:${colorSchemes[scheme][4]}`));
   };
 
   //function to switch game mode from player vs. player to computer vs. player

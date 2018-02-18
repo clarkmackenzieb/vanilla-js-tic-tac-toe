@@ -90,6 +90,8 @@
     }
   };
 
+  let colorSelect = 0;
+
   let workingGameBoard = {};
 
   let playerGame = true;
@@ -100,10 +102,13 @@
 
   let player2Name = "Player2";
 
+  let gameCount = 0;
+
   // function for game initialization, run on win, draw, and redo
 
   initializeGame = () => {
     player = 1;
+    gameCount = 0;
     for (key in gameBoard) {
       workingGameBoard[key] = Object.assign({}, gameBoard[key]);
       workingGameBoard[key].location.innerHTML = ``;
@@ -119,30 +124,10 @@
     initializeGame();
   });
 
-  // functions to edit and submit player names.
-
-  editNames = () => {
-    if (document.getElementById("hidden")) {
-      document.getElementById("hidden").removeAttribute("id");
-    }
-  };
-  submitNames = () => {
-    player1Name = document.getElementById("player1-input").value;
-    player2Name = document.getElementById("player2-input").value;
-    document.getElementById("player-1").innerHTML = `
-        <h3>${player1Name}</h3>
-        `;
-    document.getElementById("player-2").innerHTML = `
-        <h3>${player2Name}</h3>
-        `;
-    document
-      .getElementsByClassName("input-visible")[0]
-      .setAttribute("id", "hidden");
-  };
-
   //function to change color scheme
 
   changeColor = scheme => {
+    colorSelect = scheme;
     let bodyBackground = document.getElementsByTagName("body")[0];
     let gameTiles = document.getElementsByClassName("game-tile");
     let buttonStyles = document.getElementsByTagName("button");
@@ -155,19 +140,49 @@
       ...document.getElementsByTagName("h3"),
       ...document.getElementsByTagName("h1")
     ];
+
     for (let i = 0; i < gameTiles.length; i++) {
       gameTiles[i].style.backgroundColor = `${colorSchemes[scheme][1]}`;
       gameTiles[i].style.color = `${colorSchemes[scheme][3]}`;
     }
+
     for (let j = 0; j < headers.length; j++) {
       headers[j].style.color = `${colorSchemes[scheme][4]}`;
     }
     bodyBackground.style.backgroundColor = `${colorSchemes[scheme][1]}`;
     for (k = 0; k < buttonStyles.length; k++) {
-      buttonStyles[k].style.backgroundColor = `${colorSchemes[scheme][1]}`;
-      buttonStyles[k].style.color = `${colorSchemes[scheme][3]}`;
+      buttonStyles[k].style.backgroundColor = `${colorSchemes[scheme][3]}`;
+      buttonStyles[k].style.color = `${colorSchemes[scheme][1]}`;
     }
     borders.map(x => (x.style.borderColor = `${colorSchemes[scheme][2]}`));
+  };
+
+  // functions to edit and submit player names.
+
+  editNames = () => {
+    if (document.getElementById("hidden")) {
+      document.getElementById("hidden").removeAttribute("id");
+    }
+  };
+  submitNames = () => {
+    player1Name = document.getElementById("player1-input").value;
+    player2Name = document.getElementById("player2-input").value;
+    if (playerGame) {
+      document.getElementById("player-1").innerHTML = `
+          <h3>${player1Name}</h3>
+          `;
+      document.getElementById("player-2").innerHTML = `
+          <h3>${player2Name}</h3>
+          `;
+    } else {
+      document.getElementById("player-1").innerHTML = `
+          <h3>${player1Name}</h3>
+          `;
+    }
+    document
+      .getElementsByClassName("input-visible")[0]
+      .setAttribute("id", "hidden");
+    changeColor(colorSelect);
   };
 
   //function to switch game mode from player vs. player to computer vs. player
@@ -192,12 +207,10 @@
       document.getElementById("player-2").innerHTML = `
           <h3>Watson</h3>
           `;
+      player2Name = "Watson";
     }
+    colorSelect ? changeColor(colorSelect) : null;
     initializeGame();
-  };
-
-  winGame = () => {
-    alert("You win!");
   };
 
   // large function to check win conditions each time a player moves
@@ -271,15 +284,43 @@
     }
   };
 
-  // function for logic behind computer moves
+  // function for logic behind computer moves, very basic with random numbers
 
-  computerMove = tile => {
-    let computerTile = document.getElementById(tile);
+  computerMove = () => {
+    gameCount += 1;
+    if (gameCount === 2) {
+      if (workingGameBoard.tile4.player) {
+        workingGameBoard.tile0.player = 2;
+        setTimeout(() => {
+          workingGameBoard.tile0.location.classList.add("fade-in");
+          workingGameBoard.tile0.location.innerHTML = `
+            <p class="markers">O</p>
+            `;
+          gameCheck(2);
+        }, 1500);
+      }
+    } else {
+      let randomMove = Math.floor(Math.random() * 9);
+      while (workingGameBoard[`tile${randomMove}`].player) {
+        console.log(workingGameBoard[`tile${randomMove}`].player);
+        randomMove = Math.floor(Math.random() * 9);
+      }
+      workingGameBoard[`tile${randomMove}`].player = 2;
+      setTimeout(() => {
+        console.log(randomMove);
+        workingGameBoard[`tile${randomMove}`].location.classList.add("fade-in");
+        workingGameBoard[`tile${randomMove}`].location.innerHTML = `
+            <p class="markers">O</p>
+            `;
+        gameCheck(2);
+      }, 1500);
+    }
   };
 
   //function for player moving
 
   playerMove = tile => {
+    gameCount += 1;
     // removing all instances of the flash animation and adding it for the player whose turn it is
     document.getElementById("player-1").classList.remove("flash");
     document.getElementById("player-2").classList.remove("flash");
@@ -292,15 +333,17 @@
             `;
 
         workingGameBoard[tile].player = 1;
+        gameTracker = gameCheck(1);
         //functionality here for checking if the player has won, if they haven't, and if it if computer vs. player
-        if (gameCheck(1) && playerGame) {
+        if (gameTracker && playerGame) {
           return true;
-        } else if (!gameCheck(1) && playerGame) {
+        } else if (!gameTracker && playerGame) {
           player = 2;
 
           document.getElementById(`player-${player}`).classList.add("flash");
-        } else if (!gameCheck(1) && !playerGame) {
-          computerMove(1);
+        } else if (!gameTracker && !playerGame) {
+          document.getElementById("player-1").classList.remove("flash");
+          computerMove();
         }
       } else if (player === 2) {
         player = 1;

@@ -170,18 +170,17 @@
     player1Name = document.getElementById("player1-input").value;
     player2Name = document.getElementById("player2-input").value;
     if (playerGame) {
-      document.getElementById("player-1").innerHTML = `
-          <h3>${player1Name}</h3>`;
-      document.getElementById("player-2").innerHTML = `
-          <h3>${player2Name}</h3>`;
+      document.getElementById("player-1").innerText = `
+          ${player1Name}`;
+      document.getElementById("player-2").innerText = `
+          ${player2Name}`;
     } else {
-      document.getElementById("player-1").innerHTML = `
-          <h3>${player1Name}</h3>`;
+      document.getElementById("player-1").innerText = `
+          ${player1Name}`;
     }
     document
       .getElementsByClassName("input-visible")[0]
       .setAttribute("id", "hidden");
-
     changeColor(colorSelect);
   };
 
@@ -283,41 +282,69 @@
   };
 
   // function for logic behind computer moves, very basic with random numbers
-
   computerMove = () => {
+    console.log("watson");
     gameCount += 1;
-    // the only actual "smart" part of the computer to play the optinal move if the player starts in the center
-    if (gameCount === 2) {
-      if (workingGameBoard.tile4.player) {
-        workingGameBoard.tile0.player = 2;
-        // set timeout to simulate actual thought
-
-        setTimeout(() => {
-          workingGameBoard.tile0.location.classList.add("fade-in");
-          workingGameBoard.tile0.location.innerHTML = `
-            <p class="markers">O</p>`;
-
-          gameCheck(2);
-        }, 1500);
-      }
+    if (gameCount === 2 && workingGameBoard.tile4.player) {
+      workingGameBoard.tile0.player = 2;
+      setTimeout(() => {
+        workingGameBoard.tile0.location.classList.add("fade-in");
+        workingGameBoard.tile0.location.innerHTML = `
+              <p class="markers">O</p>
+              `;
+        gameCheck(2);
+      }, 1500);
     } else {
       let randomMove = Math.floor(Math.random() * 9);
-
       while (workingGameBoard[`tile${randomMove}`].player) {
+        console.log(workingGameBoard[`tile${randomMove}`].player);
         randomMove = Math.floor(Math.random() * 9);
       }
-
       workingGameBoard[`tile${randomMove}`].player = 2;
-
       setTimeout(() => {
+        console.log(randomMove);
         workingGameBoard[`tile${randomMove}`].location.classList.add("fade-in");
         workingGameBoard[`tile${randomMove}`].location.innerHTML = `
-            <p class="markers">O</p>`;
-
+              <p class="markers">O</p>
+              `;
         gameCheck(2);
       }, 1500);
     }
   };
+  // computerMove = () => {
+  //   gameCount += 1;
+  //   // the only actual "smart" part of the computer to play the optinal move if the player starts in the center
+  //   if (gameCount === 2) {
+  //     if (workingGameBoard.tile4.player) {
+  //       workingGameBoard.tile0.player = 2;
+  //       // set timeout to simulate actual thought
+
+  //       setTimeout(() => {
+  //         workingGameBoard.tile0.location.classList.add("fade-in");
+  //         workingGameBoard.tile0.location.innerHTML = `
+  //           <p class="markers">O</p>`;
+
+  //         gameCheck(2);
+  //       }, 1500);
+  //     }
+  //   } else {
+  //     let randomMove = Math.floor(Math.random() * 9);
+
+  //     while (workingGameBoard[`tile${randomMove}`].player) {
+  //       randomMove = Math.floor(Math.random() * 9);
+  //     }
+
+  //     workingGameBoard[`tile${randomMove}`].player = 2;
+
+  //     setTimeout(() => {
+  //       workingGameBoard[`tile${randomMove}`].location.classList.add("fade-in");
+  //       workingGameBoard[`tile${randomMove}`].location.innerHTML = `
+  //           <p class="markers">O</p>`;
+
+  //       gameCheck(2);
+  //     }, 1500);
+  //   }
+  // };
 
   //function for player moving
 

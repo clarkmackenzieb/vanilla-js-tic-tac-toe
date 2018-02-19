@@ -79,10 +79,10 @@
 }
 
 .input-inner-styling {
-  width: 30vw;
+  width: 50vw;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 button {
@@ -93,6 +93,7 @@ button {
   text-align: center;
   text-decoration: none;
   font-size: 16px;
+  margin: 10px;
 }
 
 #hidden {
@@ -148,10 +149,11 @@ button {
 
 .color-box-container {
   height: auto;
-  width: 40vw;
+  width: 70vw;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .color-wrapper {
@@ -161,6 +163,7 @@ button {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  margin: 10px;
 }
 
 .color-boxes {
